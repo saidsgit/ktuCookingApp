@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LabOverview">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="150dp"
+        tools:layout_editor_absoluteY="80dp">
+
+        <TextView
+            android:id="@+id/tvLabOverview"
+            android:layout_width="match_parent"
+            android:layout_height="96dp"
+            android:layout_marginTop="50dp"
+            android:background="#FFC107"
+            android:padding="8dp"
+            android:text="In the connected Screens all the Laboratory Tasks that could not be implemented in the Cooking App are fullfilled"
+            android:textAlignment="center"
+            android:textColor="#2196F3"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnLW1"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="50dp"
+            android:padding="5dp"
+            android:text="Laboratory Work 1" />
+
+        <Button
+            android:id="@+id/btnLW2"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="32dp"
+            android:padding="5dp"
+            android:text="Laboratory Work 2" />
+
+        <Button
+            android:id="@+id/btnLW3"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="32dp"
+            android:padding="5dp"
+            android:text="Laboratory Work 3" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

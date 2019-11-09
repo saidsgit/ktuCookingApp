@@ -6,17 +6,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class LabWorkOverview extends AppCompatActivity {
+public class LabWork1 extends AppCompatActivity {
 
-    private Button btnLab1, btnLab2, btnLab3;
+    private Button btnLab1, btnLab2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lab_work_overview);
+        setContentView(R.layout.activity_lab_work1);
 
         btnLab1 = (Button) findViewById(R.id.btnLab1);
         btnLab2 = (Button) findViewById(R.id.btnLab2);
-        btnLab3 = (Button) findViewById(R.id.btnLab3);
 
         btnLab1.setOnClickListener(btnLab1Click);
     }

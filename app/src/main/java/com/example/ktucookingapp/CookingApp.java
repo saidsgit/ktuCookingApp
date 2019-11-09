@@ -55,7 +55,17 @@ public class CookingApp extends AppCompatActivity {
             }
         });
 
+        listV.setOnItemLongClickListener(itemLongClick);
     }
+
+    private AdapterView.OnItemLongClickListener itemLongClick = new AdapterView.OnItemLongClickListener() {
+        @Override
+        public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+            recipes.remove(i);
+            adapter.notifyDataSetChanged();
+            return false;
+        }
+    };
 
     private View.OnClickListener btnAddClick = new View.OnClickListener() {
         @Override
