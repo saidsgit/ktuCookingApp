@@ -14,6 +14,7 @@ public class RequestOperator extends Thread {
     public interface RequestOperatorListener{
         void success (ModelPost publication);
         void failed (int responseCode);
+        void addPostsNumber(int countPosts);
     }
 
     private RequestOperatorListener listener;
@@ -27,8 +28,10 @@ public class RequestOperator extends Thread {
         try{
             sleep(2000);
             ModelPost publication = request ();
+            String jsnString = request2();
             if (publication!=null){
                 success(publication);
+                addPostsNumber(this.countPosts(jsnString));
             }
             else{
                 failed (responseCode);
@@ -39,6 +42,69 @@ public class RequestOperator extends Thread {
             failed(-2);
         } catch (InterruptedException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void addPostsNumber(int countPosts) {
+        if (listener!=null){
+            listener.addPostsNumber(countPosts);
+        }
+    }
+
+    private int countPosts(String jsnString) {
+        int counter = 0;
+        char c;
+        for(int i = 0; i < jsnString.length(); i++) {
+            c = jsnString.charAt(i);
+            if(c == '{') counter++;
+        }
+        return counter;
+    }
+
+    private String request2() throws IOException, JSONException {
+        //URL address
+        URL obj = new URL ("http://jsonplaceholder.typicode.com/posts");
+
+        //Executor
+        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+        //Determined what method will be used (GET, POST, PUT, or DELETE)
+        con.setRequestMethod("GET");
+
+        //Determine the content type. In this case, it is a JSON variable
+        con.setRequestProperty("Content-Type", "application/json");
+
+        //Make request and receive a response
+        responseCode = con.getResponseCode();
+        System.out.println("Response Code: " + responseCode);
+
+        InputStreamReader streamReader;
+
+        //If response okay, using InputStream
+        //If not, using error stream
+        if(responseCode==200){
+            streamReader = new InputStreamReader(con.getInputStream());
+        }else {
+            streamReader = new InputStreamReader(con.getErrorStream());
+        }
+
+        BufferedReader in = new BufferedReader(streamReader);
+        String inputLine;
+        StringBuffer response = new StringBuffer();
+
+        while ((inputLine = in.readLine()) != null){
+            response.append(inputLine);
+        }
+        in.close();
+
+        //print Result
+        System.out.println(response.toString());
+
+        if (responseCode==200){
+            return response.toString();
+        }
+        else{
+            return null;
         }
     }
 

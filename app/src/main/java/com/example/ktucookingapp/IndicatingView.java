@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.View;
 
+
 public class IndicatingView extends View {
     public static final int NOTEEXECUTED = 0;
     public static final int SUCCESS = 1;

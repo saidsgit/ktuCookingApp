@@ -6,13 +6,18 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@drawable/said"
+        android:label="Digital tastes better"
+        android:roundIcon="@mipmap/said"
         android:supportsRtl="true"
+        android:logo="@drawable/fleisch1"
         android:theme="@style/AppTheme">
-        <activity android:name=".LabWork2" />
-        <activity android:name=".LabOverview" />
+        <activity
+            android:name=".LabWork2"
+            android:parentActivityName=".LabOverview"/>
+        <activity
+            android:name=".LabOverview"
+            android:parentActivityName=".MainActivity"/>
         <activity android:name=".certainRecipe" />
         <activity
             android:name=".CookingApp"
@@ -21,7 +26,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".LabWork1" />
+        <activity
+            android:name=".LabWork1"
+            android:parentActivityName=".LabOverview" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

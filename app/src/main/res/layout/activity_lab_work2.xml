@@ -5,6 +5,7 @@ xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:orientation="vertical"
+    android:background="@drawable/whitewall"
 tools:context=".LabWork2" >
 
     <Button
@@ -63,5 +64,14 @@ tools:context=".LabWork2" >
         android:paddingTop="10dp"
         android:textColor="@android:color/black"
         android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tfPosts"
+        android:layout_width="match_parent"
+        android:layout_height="41dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
+        android:text="Request out of x posts" />
 
 </LinearLayout>

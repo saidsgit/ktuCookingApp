@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -13,6 +15,7 @@ public class LabWork2 extends AppCompatActivity implements RequestOperator.Reque
     Button sendRequestButton;
     TextView title;
     TextView bodyText;
+    public static TextView tfPosts;
     public static ProgressBar progressBar;
 
     private ModelPost publication;
@@ -28,6 +31,7 @@ public class LabWork2 extends AppCompatActivity implements RequestOperator.Reque
 
         title = (TextView) findViewById(R.id.title);
         bodyText = (TextView) findViewById(R.id.body_text);
+        tfPosts = (TextView) findViewById(R.id.tfPosts);
         indicator = (IndicatingView) findViewById(R.id.generated_graphic);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
     }
@@ -39,8 +43,10 @@ public class LabWork2 extends AppCompatActivity implements RequestOperator.Reque
         }
     };
 
-    private void sendRequest(){
+    private void sendRequest() {
         setIndicatorStatus(IndicatingView.SUCCESS);
+        Animation animation1 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.alphaview);
+        indicator.startAnimation(animation1);
         progressBar.setVisibility(View.VISIBLE);
         RequestOperator ro = new RequestOperator();
         ro.setListener(this);
@@ -60,6 +66,7 @@ public class LabWork2 extends AppCompatActivity implements RequestOperator.Reque
                 }
             }
         });
+        indicator.clearAnimation();
     }
 
     @Override
@@ -76,6 +83,11 @@ public class LabWork2 extends AppCompatActivity implements RequestOperator.Reque
         updatePublication();
         progressBar.setVisibility(View.INVISIBLE);
         setIndicatorStatus(IndicatingView.FAILED);
+    }
+
+    @Override
+    public void addPostsNumber(int countPosts) {
+        tfPosts.setText("Request out of " + countPosts + " posts");
     }
 
     public void setIndicatorStatus(final int status) {
