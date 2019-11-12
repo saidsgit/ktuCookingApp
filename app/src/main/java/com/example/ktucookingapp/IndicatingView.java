@@ -34,6 +34,7 @@ public class IndicatingView extends View {
                 paint = new Paint();
                 paint.setColor(Color.GREEN);
                 paint.setStrokeWidth(20f);
+                //paint.setStyle(Paint.Style.FILL);
                 //Checkmark
                 canvas.drawLine(0,0,width/2, height, paint);
                 canvas.drawLine(width/2, height, width, height/2, paint);

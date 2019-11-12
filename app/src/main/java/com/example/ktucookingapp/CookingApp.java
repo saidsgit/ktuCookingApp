@@ -23,7 +23,7 @@ public class CookingApp extends AppCompatActivity {
     Button btnAdd;
     Button btnTrans;
     Button btnSort;
-    List<recipe> recipes = MainActivity.recipes;
+    public List<recipe> recipes = MainActivity.recipes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +34,7 @@ public class CookingApp extends AppCompatActivity {
         btnAdd.setOnClickListener(btnAddClick);
         btnTrans = (Button) findViewById(R.id.btnTrans);
         btnTrans.setOnClickListener(btnTransClick);
+        btnTrans.setVisibility(View.INVISIBLE);
         btnSort = (Button) findViewById(R.id.btnSort);
         btnSort.setOnClickListener(btnSortClick);
 
@@ -71,9 +72,15 @@ public class CookingApp extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             recipes.add(new recipe("Steak", R.drawable.fleisch1, "Making best Steak ever"));
-            adapter.notifyDataSetChanged();
+            //adapter.notifyDataSetChanged();
+
+            Intent intent = new Intent(getBaseContext(), AddRecipe.class);
+            startActivity(intent);
         }
+
     };
+
+    public void addRecipe(String title,)
 
     private View.OnClickListener btnSortClick = new View.OnClickListener() {
         @Override

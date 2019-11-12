@@ -2,22 +2,23 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.ktucookingapp">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/said"
         android:label="Digital tastes better"
+        android:logo="@drawable/fleisch1"
         android:roundIcon="@mipmap/said"
         android:supportsRtl="true"
-        android:logo="@drawable/fleisch1"
         android:theme="@style/AppTheme">
+        <activity android:name=".AddRecipe"></activity>
         <activity
             android:name=".LabWork2"
-            android:parentActivityName=".LabOverview"/>
+            android:parentActivityName=".LabOverview" />
         <activity
             android:name=".LabOverview"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
         <activity android:name=".certainRecipe" />
         <activity
             android:name=".CookingApp"
