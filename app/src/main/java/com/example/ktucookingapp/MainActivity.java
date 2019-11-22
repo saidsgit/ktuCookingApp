@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private View.OnClickListener btnCookingAppClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(MainActivity.this, CookingApp.class);
+            Intent intent = new Intent(MainActivity.this, Intro.class);
             startActivity(intent);
         }
     };

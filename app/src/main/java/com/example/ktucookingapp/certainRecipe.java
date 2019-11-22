@@ -7,9 +7,13 @@ import android.view.textservice.TextInfo;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.net.URL;
+
 public class certainRecipe extends AppCompatActivity {
     private TextView tfFoodname, tfdescription;
     private ImageView foodpic;
+    private URL youtube;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

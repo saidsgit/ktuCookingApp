@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/said"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AddRecipe"></activity>
+        <activity android:name=".Intro"></activity>
+        <activity android:name=".CookingMenu" />
+        <activity android:name=".AddRecipe" />
         <activity
             android:name=".LabWork2"
             android:parentActivityName=".LabOverview" />

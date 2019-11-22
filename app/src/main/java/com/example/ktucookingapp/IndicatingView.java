@@ -34,10 +34,12 @@ public class IndicatingView extends View {
                 paint = new Paint();
                 paint.setColor(Color.GREEN);
                 paint.setStrokeWidth(20f);
-                //paint.setStyle(Paint.Style.FILL);
+                paint.setStyle(Paint.Style.FILL_AND_STROKE);
                 //Checkmark
-                canvas.drawLine(0,0,width/2, height, paint);
-                canvas.drawLine(width/2, height, width, height/2, paint);
+                //canvas.drawLine(0,0,width/2, height, paint);
+                //canvas.drawLine(width/2, height, width, height/2, paint);
+
+                canvas.drawRect(150,150,200,200,paint);
                 break;
 
             case FAILED:

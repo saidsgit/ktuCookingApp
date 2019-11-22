@@ -80,7 +80,7 @@ public class CookingApp extends AppCompatActivity {
 
     };
 
-    public void addRecipe(String title,)
+    //public void addRecipe(String title,)
 
     private View.OnClickListener btnSortClick = new View.OnClickListener() {
         @Override
