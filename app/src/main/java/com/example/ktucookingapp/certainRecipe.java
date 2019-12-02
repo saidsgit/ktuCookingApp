@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.net.URL;
 
 public class certainRecipe extends AppCompatActivity {
-    private TextView tfFoodname, tfdescription;
+    private TextView tfFoodname, tfdescription, tvingredients;
     private ImageView foodpic;
     private URL youtube;
 
@@ -26,6 +26,10 @@ public class certainRecipe extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         if(bundle != null) {
+            /*Recipe recipe = (Recipe) bundle.getParcelable("recipe");
+            tfFoodname.setText(recipe.getTitle());
+            tfdescription.setText(recipe.getDescription());
+            foodpic.setImageResource(recipe.getImageId());*/
             tfFoodname.setText(bundle.getString("name"));
             tfdescription.setText(bundle.getString("description"));
             foodpic.setImageResource(bundle.getInt("imageID"));

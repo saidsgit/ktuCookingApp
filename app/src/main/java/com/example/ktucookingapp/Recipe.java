@@ -3,32 +3,41 @@ package com.example.ktucookingapp;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class recipe implements Parcelable {
+import java.net.URL;
+
+public class Recipe implements Parcelable {
+
     private String title;
     private int imageId;
     private String description;
+    private URL youtubeUrl;
+    private String[] ingredients;
+    private String difficulty;
 
-    public recipe(String title, int imageId, String description){
+    public Recipe(String title, int imageId, String description, String[] ingredients, String difficulty){
         this.title = title;
         this.imageId = imageId;
         this.description = description;
+        this.ingredients = ingredients;
+        this.difficulty = difficulty;
+
     }
 
-    protected recipe(Parcel in) {
+    protected Recipe(Parcel in) {
         title = in.readString();
         imageId = in.readInt();
         description = in.readString();
     }
 
-    public static final Creator<recipe> CREATOR = new Creator<recipe>() {
+    public static final Creator<Recipe> CREATOR = new Creator<Recipe>() {
         @Override
-        public recipe createFromParcel(Parcel in) {
-            return new recipe(in);
+        public Recipe createFromParcel(Parcel in) {
+            return new Recipe(in);
         }
 
         @Override
-        public recipe[] newArray(int size) {
-            return new recipe[size];
+        public Recipe[] newArray(int size) {
+            return new Recipe[size];
         }
     };
 
@@ -56,6 +65,20 @@ public class recipe implements Parcelable {
         this.description = description;
     }
 
+    public URL getYoutubeUrl() { return youtubeUrl; }
+
+    public void setYoutubeUrl(URL youtubeUrl) {
+        this.youtubeUrl = youtubeUrl;
+    }
+
+    public String[] getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(String[] ingredients) {
+        this.ingredients = ingredients;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -66,5 +89,7 @@ public class recipe implements Parcelable {
         parcel.writeString(title);
         parcel.writeInt(imageId);
         parcel.writeString(description);
+        parcel.writeString(youtubeUrl.toString());
+        parcel.writeStringArray(ingredients);
     }
 }

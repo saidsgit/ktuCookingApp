@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button btnCookingApp, btnLabWork;
     private TextView tfStartMessage;
-    public static List<recipe> recipes;
+    public static List<Recipe> recipes;
 
 
     @Override
@@ -31,10 +31,11 @@ public class MainActivity extends AppCompatActivity {
         btnLabWork.setOnClickListener(btnLabWorkClick);
 
         recipes = new ArrayList<>();
-        recipes.add(new recipe("Steak", R.drawable.fleisch1, "Making best Steak ever"));
-        recipes.add(new recipe("pancakes", R.drawable.pfannekuchen, "Making best pancakes ever"));
-        recipes.add(new recipe("Spaghetti Carbonara", R.drawable.spaghetti_carbonara, "Making best Spaghetti Cabonara ever"));
-        recipes.add(new recipe("Lasagne", R.drawable.lasagne, "Making best Lasagne ever"));
+//max ist ein netter hs
+        recipes.add(new Recipe("Steak", R.drawable.fleisch1, "Making best Steak ever", xyz, "easy"));
+        recipes.add(new Recipe("pancakes", R.drawable.pfannekuchen, "Making best pancakes ever"));
+        recipes.add(new Recipe("Spaghetti Carbonara", R.drawable.spaghetti_carbonara, "Making best Spaghetti Cabonara ever"));
+        recipes.add(new Recipe("Lasagne", R.drawable.lasagne, "Making best Lasagne ever"));
 
     }
 

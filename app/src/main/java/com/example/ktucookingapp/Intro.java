@@ -19,7 +19,7 @@ public class Intro extends AppCompatActivity {
             public void run() {
                 try {
 
-                sleep(3500);
+                sleep(500);
                 Intent intent = new Intent(Intro.this, CookingApp.class);
                 startActivity(intent);
                 finish();

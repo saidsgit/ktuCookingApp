@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
@@ -23,7 +22,7 @@ public class CookingApp extends AppCompatActivity {
     Button btnAdd;
     Button btnTrans;
     Button btnSort;
-    public List<recipe> recipes = MainActivity.recipes;
+    public List<Recipe> recipes = MainActivity.recipes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +31,9 @@ public class CookingApp extends AppCompatActivity {
 
         btnAdd = (Button) findViewById(R.id.btnAdd);
         btnAdd.setOnClickListener(btnAddClick);
-        btnTrans = (Button) findViewById(R.id.btnTrans);
-        btnTrans.setOnClickListener(btnTransClick);
-        btnTrans.setVisibility(View.INVISIBLE);
+        //btnTrans = (Button) findViewById(R.id.btnTrans);
+        //btnTrans.setOnClickListener(btnTransClick);
+        //btnTrans.setVisibility(View.INVISIBLE);
         btnSort = (Button) findViewById(R.id.btnSort);
         btnSort.setOnClickListener(btnSortClick);
 
@@ -48,6 +47,7 @@ public class CookingApp extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(CookingApp.this, certainRecipe.class);
                 // name, description and image get transfered
+                //intent.putExtra("Recipe", recipes.get(i));
                 intent.putExtra("name", recipes.get(i).getTitle());
                 intent.putExtra("description", recipes.get(i).getDescription());
                 intent.putExtra("imageID", recipes.get(i).getImageId());
@@ -71,7 +71,7 @@ public class CookingApp extends AppCompatActivity {
     private View.OnClickListener btnAddClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            recipes.add(new recipe("Steak", R.drawable.fleisch1, "Making best Steak ever"));
+            recipes.add(new Recipe("Steak", R.drawable.fleisch1, "Making best Steak ever"));
             //adapter.notifyDataSetChanged();
 
             Intent intent = new Intent(getBaseContext(), AddRecipe.class);
@@ -85,9 +85,9 @@ public class CookingApp extends AppCompatActivity {
     private View.OnClickListener btnSortClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Collections.sort(recipes, new Comparator<recipe>() {
+            Collections.sort(recipes, new Comparator<Recipe>() {
                 @Override
-                public int compare(recipe r1, recipe r2) {
+                public int compare(Recipe r1, Recipe r2) {
                     return r1.getTitle().compareTo(r2.getTitle());
                 }
             });
@@ -95,14 +95,14 @@ public class CookingApp extends AppCompatActivity {
         }
     };
 
-    private View.OnClickListener btnTransClick = new View.OnClickListener() {
+    /*private View.OnClickListener btnTransClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(getBaseContext(), ListEdit.class);
             intent.putParcelableArrayListExtra("array", (ArrayList<? extends Parcelable>) recipes);
             startActivity(intent);
         }
-    };
+    };*/
 
 
 
