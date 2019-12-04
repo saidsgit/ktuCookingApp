@@ -31,6 +31,10 @@ public class AddRecipe extends AppCompatActivity {
     EditText editInstructions;
     Spinner spinner;
     ListView listViewIngredients;
+    List<String> addedIngredients = new ArrayList<>();
+    ArrayAdapter<String> adapterIngredients;
+    Button addIngredient;
+    EditText ingredientInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,14 +86,33 @@ public class AddRecipe extends AppCompatActivity {
         //Listview for the ingredients
         listViewIngredients = (ListView) findViewById(R.id.listViewIngredients);
 
-        List<String> addedIngredients = new ArrayList<>();
-        addedIngredients.add("test");
-        addedIngredients.add("hiii");
-        ArrayAdapter<String> adapterIngredients = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, addedIngredients);
+        addedIngredients.add("best");
+        addedIngredients.add("cooking");
+        addedIngredients.add("app");
+        addedIngredients.add("ever");
+        adapterIngredients = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, addedIngredients);
         //ArrayAdapter<String> adapterIngredients = new ArrayAdapter<String>(this, R.layout.listitem_ingredient, addedIngredients);
         listViewIngredients.setAdapter(adapterIngredients);
+        //Solving the height issue when having a ListView in a Scrollview
+        ListViewUtil.setListViewHeightBasedOnChildren(listViewIngredients);
+
+        //Add given ingredient-input to array/listview
+        ingredientInput = (EditText) findViewById(R.id.etNewIngredient);
+        addIngredient = (Button) findViewById(R.id.btnAddIngredient);
+        addIngredient.setOnClickListener(addIngredientClick);
     }
 
+
+    private View.OnClickListener addIngredientClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if(ingredientInput != null) {
+                addedIngredients.add(ingredientInput.getText().toString());
+                adapterIngredients.notifyDataSetChanged();
+                ListViewUtil.setListViewHeightBasedOnChildren(listViewIngredients);
+            }
+        }
+    };
 
     private View.OnClickListener addRecipeClicked = new View.OnClickListener(){
         @Override
