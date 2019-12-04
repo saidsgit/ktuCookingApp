@@ -119,6 +119,7 @@
             </LinearLayout>
 
             <ListView
+                android:nestedScrollingEnabled="true"
                 android:id="@+id/listViewIngredients"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

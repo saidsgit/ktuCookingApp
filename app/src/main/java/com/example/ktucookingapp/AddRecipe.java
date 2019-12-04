@@ -98,4 +98,5 @@ public class AddRecipe extends AppCompatActivity {
             startActivity(intent);
         }
     };
+
 }
