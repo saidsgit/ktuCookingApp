@@ -7,10 +7,12 @@ import android.view.textservice.TextInfo;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.net.URL;
 
 public class certainRecipe extends AppCompatActivity {
-    private TextView tfFoodname, tfdescription, tvingredients;
+    private TextView tfFoodname, tfdescription;
     private ImageView foodpic;
     private URL youtube;
 
@@ -26,13 +28,13 @@ public class certainRecipe extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         if(bundle != null) {
-            /*Recipe recipe = (Recipe) bundle.getParcelable("recipe");
+            Recipe recipe = (Recipe) bundle.getParcelable("recipe");
             tfFoodname.setText(recipe.getTitle());
             tfdescription.setText(recipe.getDescription());
-            foodpic.setImageResource(recipe.getImageId());*/
-            tfFoodname.setText(bundle.getString("name"));
+            foodpic.setImageResource(recipe.getImageId());
+            /*tfFoodname.setText(bundle.getString("name"));
             tfdescription.setText(bundle.getString("description"));
-            foodpic.setImageResource(bundle.getInt("imageID"));
+            foodpic.setImageResource(bundle.getInt("imageID"));*/
         }
 
     }

@@ -22,7 +22,8 @@ public class CookingApp extends AppCompatActivity {
     Button btnAdd;
     Button btnTrans;
     Button btnSort;
-    public List<Recipe> recipes = MainActivity.recipes;
+    public static List<Recipe> recipes = MainActivity.recipes;
+    public static int position = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,12 +46,13 @@ public class CookingApp extends AppCompatActivity {
         listV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                position = i;
                 Intent intent = new Intent(CookingApp.this, certainRecipe.class);
                 // name, description and image get transfered
-                //intent.putExtra("Recipe", recipes.get(i));
-                intent.putExtra("name", recipes.get(i).getTitle());
+                intent.putExtra("recipe", recipes.get(i));
+                /*intent.putExtra("name", recipes.get(i).getTitle());
                 intent.putExtra("description", recipes.get(i).getDescription());
-                intent.putExtra("imageID", recipes.get(i).getImageId());
+                intent.putExtra("imageID", recipes.get(i).getImageId());*/
 
                 startActivity(intent);
             }
@@ -71,7 +73,7 @@ public class CookingApp extends AppCompatActivity {
     private View.OnClickListener btnAddClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            recipes.add(new Recipe("Steak", R.drawable.fleisch1, "Making best Steak ever"));
+            //recipes.add(new Recipe("Steak", R.drawable.fleisch1, "Making best Steak ever"));
             //adapter.notifyDataSetChanged();
 
             Intent intent = new Intent(getBaseContext(), AddRecipe.class);

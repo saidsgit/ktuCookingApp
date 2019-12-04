@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:background="@drawable/spatulablack"
     android:orientation="vertical"
-    tools:context=".CookingApp">
+    tools:context=".CookingApp"
+    android:id="@+id/linearLayout">
 
     <!--Button
         android:id="@+id/btnTrans"
@@ -24,18 +25,25 @@
     <ListView
         android:id="@+id/listV"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="110dp"
-        android:focusable="true">
+        android:layout_height="match_parent"
+        android:layout_weight="85"
+        android:focusable="true"
+        tools:layout_conversion_absoluteHeight="621dp"
+        tools:layout_conversion_absoluteWidth="411dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
     </ListView>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#AEEA00"
         android:gravity="right"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        tools:layout_conversion_absoluteHeight="0dp"
+        tools:layout_conversion_absoluteWidth="411dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="731dp">
 
         <Button
             android:id="@+id/btnSort"

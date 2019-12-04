@@ -30,12 +30,15 @@ public class MainActivity extends AppCompatActivity {
         btnCookingApp.setOnClickListener(btnCookingAppClick);
         btnLabWork.setOnClickListener(btnLabWorkClick);
 
-        recipes = new ArrayList<>();
-//max ist ein netter hs
-        recipes.add(new Recipe("Steak", R.drawable.fleisch1, "Making best Steak ever", xyz, "easy"));
-        recipes.add(new Recipe("pancakes", R.drawable.pfannekuchen, "Making best pancakes ever"));
-        recipes.add(new Recipe("Spaghetti Carbonara", R.drawable.spaghetti_carbonara, "Making best Spaghetti Cabonara ever"));
-        recipes.add(new Recipe("Lasagne", R.drawable.lasagne, "Making best Lasagne ever"));
+        recipes = new ArrayList<Recipe>();
+        String[] ingredients = {"Salz", "Steak"};
+        recipes.add(new Recipe("Steak", R.drawable.fleisch1, "Making best Steak ever", ingredients, "easy"));
+        String[] ingredients2 = {"x", "y", "z"};
+        recipes.add(new Recipe("pancakes", R.drawable.pfannekuchen, "Making best pancakes ever", ingredients2, "easy"));
+        String[] ingredients3 = {"Spaghetti", "Cream", "x"};
+        recipes.add(new Recipe("Spaghetti Carbonara", R.drawable.spaghetti_carbonara, "Making best Spaghetti Cabonara ever", ingredients3, "easy"));
+        String[] ingredients4 = {"Minced Beef", "Cheese", "x"};
+        recipes.add(new Recipe("Lasagne", R.drawable.lasagne, "Making best Lasagne ever", ingredients4, "medium"));
 
     }
 
