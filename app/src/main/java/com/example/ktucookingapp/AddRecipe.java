@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
+import android.media.Image;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.MotionEvent;
@@ -19,35 +20,41 @@ import android.widget.RelativeLayout;
 import android.widget.Scroller;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class AddRecipe extends AppCompatActivity {
 
-    TextView title, description;
+    TextView title;
     ImageButton uploadImage;
     Button addRecipe;
-    EditText editInstructions;
+    EditText editInstructions, editYoutube;
     Spinner spinner;
-    ListView listViewIngredients;
-    List<String> addedIngredients = new ArrayList<>();
+    static ListView listViewIngredients;
+    static final List<String> addedIngredients = new ArrayList<>();
     ArrayAdapter<String> adapterIngredients;
     Button addIngredient;
-    EditText ingredientInput;
+    EditText ingredientInput, description;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_recipe);
+
+        //Gradient backround with animation
         LinearLayout relativeLayout = findViewById(R.id.gradientBackground);
         AnimationDrawable animationDrawable = (AnimationDrawable) relativeLayout.getBackground();
         animationDrawable.setEnterFadeDuration(2000);
         animationDrawable.setExitFadeDuration(4000);
         animationDrawable.start();
 
-        description = (TextView) findViewById(R.id.description);
+        title = (EditText) findViewById(R.id.editTextTitle);
+        description = (EditText) findViewById(R.id.editTextShortDescription);
         uploadImage = (ImageButton) findViewById(R.id.recipeImage);
+        editYoutube = (EditText) findViewById(R.id.editTextURL);
         addRecipe = (Button) findViewById(R.id.btnAddRecipe);
         addRecipe.setOnClickListener(addRecipeClicked);
 
@@ -86,13 +93,16 @@ public class AddRecipe extends AppCompatActivity {
         //Listview for the ingredients
         listViewIngredients = (ListView) findViewById(R.id.listViewIngredients);
 
-        addedIngredients.add("best");
+        /*addedIngredients.add("best");
         addedIngredients.add("cooking");
         addedIngredients.add("app");
-        addedIngredients.add("ever");
-        adapterIngredients = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, addedIngredients);
-        //ArrayAdapter<String> adapterIngredients = new ArrayAdapter<String>(this, R.layout.listitem_ingredient, addedIngredients);
+        addedIngredients.add("ever");*/
+        //adapterIngredients = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, addedIngredients);
+        //adapterIngredients = new ArrayAdapter<String>(this, R.layout.listitem_ingredient, R.id.tvAddedIngredient, addedIngredients);
+        adapterIngredients = new ListAdapterIngredient(this, addedIngredients);
         listViewIngredients.setAdapter(adapterIngredients);
+
+
         //Solving the height issue when having a ListView in a Scrollview
         ListViewUtil.setListViewHeightBasedOnChildren(listViewIngredients);
 
@@ -103,11 +113,15 @@ public class AddRecipe extends AppCompatActivity {
     }
 
 
+
     private View.OnClickListener addIngredientClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            if(ingredientInput != null) {
-                addedIngredients.add(ingredientInput.getText().toString());
+            String input = ingredientInput.getText().toString();
+
+            if(input.length() > 0) {
+                addedIngredients.add(input);
+                ingredientInput.setText("");
                 adapterIngredients.notifyDataSetChanged();
                 ListViewUtil.setListViewHeightBasedOnChildren(listViewIngredients);
             }
@@ -117,6 +131,38 @@ public class AddRecipe extends AppCompatActivity {
     private View.OnClickListener addRecipeClicked = new View.OnClickListener(){
         @Override
         public void onClick(View v) {
+            if(title.getText().toString().length() < 1) {
+                Toast toast = Toast.makeText(getApplicationContext(), "No title, no recipe", Toast.LENGTH_LONG);
+                toast.show();
+                return;
+            }
+
+            if(description.getText().toString().length() < 1) {
+                Toast toast2 = Toast.makeText(getApplicationContext(), "No description, no recipe", Toast.LENGTH_SHORT);
+                toast2.show();
+                return;
+            }
+
+            //Add recipe
+            String newTitle = title.getText().toString();
+            String newShortDescription = description.getText().toString();
+            List<String> ingredients = addedIngredients;
+            int image = R.drawable.said;
+            String newDiff = spinner.getSelectedItem().toString();
+            Recipe newRecipe = new Recipe(newTitle, image, newShortDescription, ingredients, newDiff);
+            CookingApp.addRecipe(newRecipe);
+
+
+            //Clear screen
+            title.setText("");
+            description.setText("");
+            addedIngredients.clear();
+            adapterIngredients.notifyDataSetChanged();
+            ListViewUtil.setListViewHeightBasedOnChildren(listViewIngredients);
+            editInstructions.setText("");
+            editYoutube.setText("");
+            spinner.setSelection(0);
+
             Intent intent = new Intent(getBaseContext(), CookingApp.class);
             startActivity(intent);
         }

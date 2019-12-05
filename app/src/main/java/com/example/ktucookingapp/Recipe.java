@@ -5,19 +5,20 @@ import android.os.Parcelable;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 
 public class Recipe implements Parcelable {
 
     private String title;
     private int imageId;
     private String description;
-    private String[] ingredients;
+    private List<String> ingredients;
 
 
     private String difficulty;
     private URL youtubeUrl;
 
-    public Recipe(String title, int imageId, String description, String[] ingredients, String difficulty){
+    public Recipe(String title, int imageId, String description, List<String> ingredients, String difficulty){
         this.title = title;
         this.imageId = imageId;
         this.description = description;
@@ -30,7 +31,7 @@ public class Recipe implements Parcelable {
         title = in.readString();
         imageId = in.readInt();
         description = in.readString();
-        ingredients = in.createStringArray();
+        ingredients = in.createStringArrayList();
         difficulty = in.readString();
         if(youtubeUrl != null) {youtubeUrl = new URL(in.readString());}
     }
@@ -82,11 +83,11 @@ public class Recipe implements Parcelable {
         this.youtubeUrl = youtubeUrl;
     }
 
-    public String[] getIngredients() {
+    public List<String> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(String[] ingredients) {
+    public void setIngredients(List<String> ingredients) {
         this.ingredients = ingredients;
     }
 
@@ -108,7 +109,7 @@ public class Recipe implements Parcelable {
         parcel.writeString(title);
         parcel.writeInt(imageId);
         parcel.writeString(description);
-        parcel.writeStringArray(ingredients);
+        parcel.writeStringList(ingredients);
         parcel.writeString(difficulty);
         if(youtubeUrl != null) {parcel.writeString(youtubeUrl.toString());}
     }

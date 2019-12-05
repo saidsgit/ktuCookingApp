@@ -18,7 +18,7 @@ import java.util.List;
 public class CookingApp extends AppCompatActivity {
 
     ListView listV;
-    private ListAdapter adapter;
+    private static ListAdapter adapter;
     Button btnAdd;
     Button btnTrans;
     Button btnSort;
@@ -59,6 +59,11 @@ public class CookingApp extends AppCompatActivity {
         });
 
         listV.setOnItemLongClickListener(itemLongClick);
+    }
+
+    public static void addRecipe(Recipe r) {
+        recipes.add(r);
+        adapter.notifyDataSetChanged();
     }
 
     private AdapterView.OnItemLongClickListener itemLongClick = new AdapterView.OnItemLongClickListener() {

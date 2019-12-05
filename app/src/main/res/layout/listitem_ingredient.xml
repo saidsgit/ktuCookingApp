@@ -4,16 +4,20 @@
     android:layout_height="wrap_content">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnDeleteIngredient"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:background="@drawable/button_bg_round"
         android:padding="5dp"
         android:text="X" />
 
-    <Textview
-        android:id="@+id/certainIngredient"
+    <TextView
+        android:id="@+id/tvAddedIngredient"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" />
+        android:layout_height="match_parent"
+        android:layout_marginLeft="15dp"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:text="TextView" />
+
 </LinearLayout>

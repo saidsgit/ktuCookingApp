@@ -119,11 +119,11 @@
             </LinearLayout>
 
             <ListView
-                android:nestedScrollingEnabled="true"
                 android:id="@+id/listViewIngredients"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp" />
+                android:layout_marginTop="15dp"
+                android:nestedScrollingEnabled="true" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -210,7 +210,7 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="Youtube URL"
-                    android:inputType="text" />
+                    android:inputType="textUri" />
 
             </LinearLayout>
 

@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -31,13 +32,13 @@ public class MainActivity extends AppCompatActivity {
         btnLabWork.setOnClickListener(btnLabWorkClick);
 
         recipes = new ArrayList<Recipe>();
-        String[] ingredients = {"Salz", "Steak"};
+        List<String> ingredients = Arrays.asList("Steak", "Salz");
         recipes.add(new Recipe("Steak", R.drawable.fleisch1, "Making best Steak ever", ingredients, "easy"));
-        String[] ingredients2 = {"x", "y", "z"};
-        recipes.add(new Recipe("pancakes", R.drawable.pfannekuchen, "Making best pancakes ever", ingredients2, "easy"));
-        String[] ingredients3 = {"Spaghetti", "Cream", "x"};
+        List<String> ingredients2 = Arrays.asList("x", "y");
+        recipes.add(new Recipe("Pancakes", R.drawable.pfannekuchen, "Making best pancakes ever", ingredients2, "easy"));
+        List<String> ingredients3 = Arrays.asList("Spaghetti", "Cream", "x");
         recipes.add(new Recipe("Spaghetti Carbonara", R.drawable.spaghetti_carbonara, "Making best Spaghetti Cabonara ever", ingredients3, "easy"));
-        String[] ingredients4 = {"Minced Beef", "Cheese", "x"};
+        List<String> ingredients4 = Arrays.asList("Minced Beef", "Cheese", "x");
         recipes.add(new Recipe("Lasagne", R.drawable.lasagne, "Making best Lasagne ever", ingredients4, "medium"));
 
     }

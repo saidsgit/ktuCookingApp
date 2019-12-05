@@ -42,8 +42,8 @@ public class ListAdapter extends ArrayAdapter<Recipe> {
         title.setText(item.getTitle());
         description.setText(item.getDescription());
         image.setImageResource(item.getImageId());
-        tvingredientsnumber.setText(""+ item.getIngredients().length);
-        tvdifficulty.setText((item.getDifficulty()));
+        tvingredientsnumber.setText("Number of ingredients: "+ item.getIngredients().size());
+        tvdifficulty.setText("Difficulty: " + item.getDifficulty());
 
         ImageButton btnShare = (ImageButton) v.findViewById(R.id.btnShare);
         btnShare.setOnClickListener(new View.OnClickListener() {
