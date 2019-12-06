@@ -2,6 +2,8 @@ package com.example.ktucookingapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.Image;
@@ -9,6 +11,7 @@ import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.MotionEvent;
 import android.view.View;
+import android.webkit.URLUtil;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -38,6 +41,7 @@ public class AddRecipe extends AppCompatActivity {
     ArrayAdapter<String> adapterIngredients;
     Button addIngredient;
     EditText ingredientInput, description;
+    int imageID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +61,7 @@ public class AddRecipe extends AppCompatActivity {
         editYoutube = (EditText) findViewById(R.id.editTextURL);
         addRecipe = (Button) findViewById(R.id.btnAddRecipe);
         addRecipe.setOnClickListener(addRecipeClicked);
+        imageID = -1;
 
         //Makes the edittext for the instructions scrollable
         editInstructions = (EditText) findViewById(R.id.etInstructions);
@@ -147,9 +152,67 @@ public class AddRecipe extends AppCompatActivity {
             String newTitle = title.getText().toString();
             String newShortDescription = description.getText().toString();
             List<String> ingredients = addedIngredients;
-            int image = R.drawable.said;
+            String newInstructions = editInstructions.getText().toString();
+            imageID = R.drawable.said;
+            String newUrl = editYoutube.getText().toString();
+
+            //Check and ask user for empty fields
+            /*if(addedIngredients.size() == 0 || newInstructions.length() < 1 || imageID == -1 ||
+                    newUrl.length() < 1 || spinner.getSelectedItemId() == 0) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+                builder.setTitle("Warning!");
+                builder.setMessage("You didn´t fill all! You want to progress?");
+                builder.setCancelable(false);
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //do nothing
+                    }
+                });
+
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        return;
+                    }
+                });
+
+                builder.show();
+            }*/
+
+            if(URLUtil.isValidUrl(newUrl)==false) {
+                /*if(newUrl.length() < 1) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+                    builder.setTitle("Warning!");
+                    builder.setMessage("No youtube link! You want to progress?");
+                    builder.setCancelable(false);
+                    builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //do nothing
+                        }
+                    });
+
+                    builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            return;
+                        }
+                    });
+
+                    builder.show();
+                }
+                else {*/
+                    Toast toast = Toast.makeText(getApplicationContext(), "Wrong URL, bro", Toast.LENGTH_SHORT);
+                    toast.show();
+                    return;
+                //}
+
+            }
             String newDiff = spinner.getSelectedItem().toString();
-            Recipe newRecipe = new Recipe(newTitle, image, newShortDescription, ingredients, newDiff);
+            if(newDiff == "Choose meals difficulty") {newDiff = "unranked";}
+            Recipe newRecipe = new Recipe(newTitle, imageID, newShortDescription, ingredients, newDiff, newInstructions);
+
             CookingApp.addRecipe(newRecipe);
 
 
@@ -162,6 +225,7 @@ public class AddRecipe extends AppCompatActivity {
             editInstructions.setText("");
             editYoutube.setText("");
             spinner.setSelection(0);
+            imageID = -1;
 
             Intent intent = new Intent(getBaseContext(), CookingApp.class);
             startActivity(intent);

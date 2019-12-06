@@ -12,18 +12,21 @@ public class Recipe implements Parcelable {
     private String title;
     private int imageId;
     private String description;
+
+    private String instructions;
+
     private List<String> ingredients;
 
-
     private String difficulty;
-    private URL youtubeUrl;
 
-    public Recipe(String title, int imageId, String description, List<String> ingredients, String difficulty){
+    private URL youtubeUrl;
+    public Recipe(String title, int imageId, String description, List<String> ingredients, String difficulty, String instructions){
         this.title = title;
         this.imageId = imageId;
         this.description = description;
         this.ingredients = ingredients;
         this.difficulty = difficulty;
+        this.instructions = instructions;
         //this.youtubeUrl = new URL(difficulty);
     }
 
@@ -34,6 +37,7 @@ public class Recipe implements Parcelable {
         ingredients = in.createStringArrayList();
         difficulty = in.readString();
         if(youtubeUrl != null) {youtubeUrl = new URL(in.readString());}
+        instructions = in.readString();
     }
 
     public static final Creator<Recipe> CREATOR = new Creator<Recipe>() {
@@ -99,6 +103,14 @@ public class Recipe implements Parcelable {
         this.difficulty = difficulty;
     }
 
+    public String getInstructions() {
+        return instructions;
+    }
+
+    public void setInstructions(String instructions) {
+        this.instructions = instructions;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -112,5 +124,6 @@ public class Recipe implements Parcelable {
         parcel.writeStringList(ingredients);
         parcel.writeString(difficulty);
         if(youtubeUrl != null) {parcel.writeString(youtubeUrl.toString());}
+        parcel.writeString(instructions);
     }
 }

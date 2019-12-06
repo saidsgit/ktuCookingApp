@@ -33,13 +33,13 @@ public class MainActivity extends AppCompatActivity {
 
         recipes = new ArrayList<Recipe>();
         List<String> ingredients = Arrays.asList("Steak", "Salz");
-        recipes.add(new Recipe("Steak", R.drawable.fleisch1, "Making best Steak ever", ingredients, "easy"));
+        recipes.add(new Recipe("Steak", R.drawable.fleisch1, "Making best Steak ever", ingredients, "easy", "1"));
         List<String> ingredients2 = Arrays.asList("x", "y");
-        recipes.add(new Recipe("Pancakes", R.drawable.pfannekuchen, "Making best pancakes ever", ingredients2, "easy"));
+        recipes.add(new Recipe("Pancakes", R.drawable.pfannekuchen, "Making best pancakes ever", ingredients2, "easy", "1"));
         List<String> ingredients3 = Arrays.asList("Spaghetti", "Cream", "x");
-        recipes.add(new Recipe("Spaghetti Carbonara", R.drawable.spaghetti_carbonara, "Making best Spaghetti Cabonara ever", ingredients3, "easy"));
+        recipes.add(new Recipe("Spaghetti Carbonara", R.drawable.spaghetti_carbonara, "Making best Spaghetti Cabonara ever", ingredients3, "easy", "1"));
         List<String> ingredients4 = Arrays.asList("Minced Beef", "Cheese", "x");
-        recipes.add(new Recipe("Lasagne", R.drawable.lasagne, "Making best Lasagne ever", ingredients4, "medium"));
+        recipes.add(new Recipe("Lasagne", R.drawable.lasagne, "Making best Lasagne ever", ingredients4, "medium", "1"));
 
     }
 

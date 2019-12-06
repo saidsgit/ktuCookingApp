@@ -1,50 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/spatulablack"
+    android:background="@drawable/whitewall"
+    android:orientation="vertical"
     tools:context=".certainRecipe">
 
-    <ImageView
-        android:id="@+id/foodpic"
-        android:layout_width="333dp"
-        android:layout_height="368dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/fleisch1" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF">
 
-    <TextView
-        android:id="@+id/tfFoodname"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="#D0FFFFFF"
-        android:text="FOOOD"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/foodpic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/foodpic"
-        app:layout_constraintVertical_bias="0.881" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tfdescription"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="#CBFFFFFF"
-        android:text="Descriptiooon"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/foodpic"
-        app:layout_constraintVertical_bias="0.183" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/tfFoodname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="#D0FFFFFF"
+                android:text="FOOOD"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                tools:text="foodname" />
+
+            <ImageView
+                android:id="@+id/foodpic"
+                android:layout_width="wrap_content"
+                android:layout_height="300dp"
+                android:foregroundGravity="center" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/btnYoutubeCertainRecipe"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="right"
+                    app:srcCompat="@android:drawable/ic_media_play" />
+
+                <ImageButton
+                    android:id="@+id/btnShareCertainRecipe"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="right"
+                    app:srcCompat="?attr/actionModeShareDrawable" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvDiff"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:background="#AEEA00"
+                android:text="Difficulty"
+                android:textSize="18sp" />
+
+            android:text="Descriptiooon"
+
+            <TextView
+                android:id="@+id/shortDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:background="#AEEA00"
+                android:text="Short Description"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tfdescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="#00FFFFFF"
+                android:scrollHorizontally="false"
+                android:text="Short Description" />
+
+            <TextView
+                android:id="@+id/tvIngredientsHead"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:background="#AEEA00"
+                android:text="Ingredients"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tvIngredients"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="#00FFFFFF"
+                android:scrollHorizontally="false"
+                android:text="Ingredients" />
+
+            <TextView
+                android:id="@+id/tvInstructionHead"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:background="#AEEA00"
+                android:text="Instructions"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tvInstructions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="#FFFFFF"
+                android:scrollHorizontally="false"
+                android:text="Instructions InstructionsInstructions InstructionsInstructions InstructionsInstructions InstructionsInstructions InstructionsInstructions InstructionsInstructions InstructionsInstructions InstructionsInstructions InstructionsInstructions Instructions" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
