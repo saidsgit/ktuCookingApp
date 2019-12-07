@@ -178,8 +178,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:paddingLeft="15dp"
-                    android:text="Image"
+                    android:text="Choose Image:"
                     android:textAllCaps="false"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <ImageButton
@@ -188,6 +189,14 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     app:srcCompat="@android:drawable/ic_menu_upload" />
+
+                <ImageView
+                    android:id="@+id/ivUploadedImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxHeight="300dp"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/intro" />
             </LinearLayout>
 
             <LinearLayout

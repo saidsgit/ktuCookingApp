@@ -3,8 +3,12 @@
     package="com.example.ktucookingapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
+        android:name=".AppActivity"
         android:allowBackup="true"
         android:icon="@drawable/said"
         android:label="Digital tastes better"
@@ -12,7 +16,12 @@
         android:roundIcon="@mipmap/said"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Intro"></activity>
+        <activity android:name=".Compass"></activity>
+        <activity
+            android:name=".LabWork3"
+            android:parentActivityName=".LabOverview"></activity>
+        <activity android:name=".playYoutube" />
+        <activity android:name=".Intro" />
         <activity android:name=".CookingMenu" />
         <activity android:name=".AddRecipe" />
         <activity

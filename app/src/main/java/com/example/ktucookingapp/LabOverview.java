@@ -45,7 +45,8 @@ public class LabOverview extends AppCompatActivity {
     private View.OnClickListener LW3click = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            ;
+            Intent intent = new Intent(LabOverview.this, LabWork3.class);
+            startActivity(intent);
         }
     };
 }

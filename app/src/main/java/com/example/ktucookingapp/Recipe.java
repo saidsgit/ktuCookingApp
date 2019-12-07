@@ -3,23 +3,35 @@ package com.example.ktucookingapp;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
+@Entity
 public class Recipe implements Parcelable {
 
+    @PrimaryKey(autoGenerate = true)
+    private int id;
+
+    @ColumnInfo(name = "title")
     private String title;
+    @ColumnInfo(name = "imageID")
     private int imageId;
+    @ColumnInfo(name = "description")
     private String description;
-
+    @ColumnInfo(name = "instructions")
     private String instructions;
-
+    @ColumnInfo(name = "ingredients")
     private List<String> ingredients;
-
+    @ColumnInfo(name = "difficulty")
     private String difficulty;
-
+    @ColumnInfo(name = "youtubeURL")
     private URL youtubeUrl;
+
     public Recipe(String title, int imageId, String description, List<String> ingredients, String difficulty, String instructions){
         this.title = title;
         this.imageId = imageId;
@@ -27,7 +39,29 @@ public class Recipe implements Parcelable {
         this.ingredients = ingredients;
         this.difficulty = difficulty;
         this.instructions = instructions;
-        //this.youtubeUrl = new URL(difficulty);
+        try {
+            youtubeUrl = new URL("http://youtube.com");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public String toString() {
+        String result;
+        result = "Schau dir folgendes Boss-Rezept an: " + "\n" + "\n" +
+                this.title + "\n" +
+                "_______________________" + "\n" + "\n" +
+                this.description + "\n" +
+                "Difficulty: " + this.difficulty + "\n" + "\n" +
+                "All you need is: " + "\n" +
+                this.ingredients.toString() + "\n" +"\n" +
+                "And that´s how it works: " + "\n" +
+                this.instructions + "\n" + "\n" +
+                "You can also check this video here: " + "\n" +
+                this.youtubeUrl.toString();
+
+        return result;
     }
 
     protected Recipe(Parcel in) throws MalformedURLException {
@@ -36,8 +70,19 @@ public class Recipe implements Parcelable {
         description = in.readString();
         ingredients = in.createStringArrayList();
         difficulty = in.readString();
-        if(youtubeUrl != null) {youtubeUrl = new URL(in.readString());}
         instructions = in.readString();
+        youtubeUrl = new URL(in.readString());
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(title);
+        parcel.writeInt(imageId);
+        parcel.writeString(description);
+        parcel.writeStringList(ingredients);
+        parcel.writeString(difficulty);
+        parcel.writeString(instructions);
+        parcel.writeString(youtubeUrl.toString());
     }
 
     public static final Creator<Recipe> CREATOR = new Creator<Recipe>() {
@@ -111,19 +156,16 @@ public class Recipe implements Parcelable {
         this.instructions = instructions;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(title);
-        parcel.writeInt(imageId);
-        parcel.writeString(description);
-        parcel.writeStringList(ingredients);
-        parcel.writeString(difficulty);
-        if(youtubeUrl != null) {parcel.writeString(youtubeUrl.toString());}
-        parcel.writeString(instructions);
+    public int describeContents() {
+        return 0;
     }
 }

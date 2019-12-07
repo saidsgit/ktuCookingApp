@@ -10,12 +10,12 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#FFFFFF">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:gravity="center_horizontal"
             android:orientation="vertical">
 
             <TextView
@@ -36,6 +36,14 @@
                 android:layout_height="300dp"
                 android:foregroundGravity="center" />
 
+            <view
+                android:id="@+id/youtubeview123"
+                class="com.google.android.youtube.player.YouTubePlayerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/intro" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -55,6 +63,7 @@
                     android:layout_height="60dp"
                     android:layout_gravity="right"
                     app:srcCompat="?attr/actionModeShareDrawable" />
+
             </LinearLayout>
 
             <TextView
@@ -84,7 +93,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="20dp"
-                android:background="#00FFFFFF"
+                android:background="#FFFFFF"
                 android:scrollHorizontally="false"
                 android:text="Short Description" />
 
@@ -104,7 +113,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="20dp"
-                android:background="#00FFFFFF"
+                android:background="#FFFFFF"
                 android:scrollHorizontally="false"
                 android:text="Ingredients" />
 

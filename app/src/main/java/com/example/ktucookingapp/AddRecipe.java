@@ -1,13 +1,20 @@
 package com.example.ktucookingapp;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.method.ScrollingMovementMethod;
 import android.view.MotionEvent;
 import android.view.View;
@@ -17,6 +24,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -25,6 +33,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.nabinbhandari.android.permissions.PermissionHandler;
+import com.nabinbhandari.android.permissions.Permissions;
+
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -41,7 +54,7 @@ public class AddRecipe extends AppCompatActivity {
     ArrayAdapter<String> adapterIngredients;
     Button addIngredient;
     EditText ingredientInput, description;
-    int imageID;
+    int imageID =R.drawable.intro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +75,8 @@ public class AddRecipe extends AppCompatActivity {
         addRecipe = (Button) findViewById(R.id.btnAddRecipe);
         addRecipe.setOnClickListener(addRecipeClicked);
         imageID = -1;
+
+        uploadImage.setOnClickListener(uploadImageClick);
 
         //Makes the edittext for the instructions scrollable
         editInstructions = (EditText) findViewById(R.id.etInstructions);
@@ -119,6 +134,49 @@ public class AddRecipe extends AppCompatActivity {
 
 
 
+    private static int RESULT_LOAD_IMAGE = 1;
+
+    private View.OnClickListener uploadImageClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Permissions p = new Permissions();
+            p.check(getApplicationContext()/*context*/, Manifest.permission.READ_EXTERNAL_STORAGE, null, new PermissionHandler() {
+                @Override
+                public void onGranted() {
+                    Intent i = new Intent(
+                            Intent.ACTION_PICK,
+                            MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+                    startActivityForResult(i, RESULT_LOAD_IMAGE);
+                }
+            });
+        }
+    };
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = { MediaStore.Images.Media.DATA };
+
+            Cursor cursor = getContentResolver().query(selectedImage,
+                    filePathColumn, null, null, null);
+            cursor.moveToFirst();
+
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String picturePath = cursor.getString(columnIndex);
+            cursor.close();
+
+            ImageView imageView = (ImageView) findViewById(R.id.ivUploadedImage);
+            imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+
+        }
+
+
+    }
+
     private View.OnClickListener addIngredientClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -153,7 +211,7 @@ public class AddRecipe extends AppCompatActivity {
             String newShortDescription = description.getText().toString();
             List<String> ingredients = addedIngredients;
             String newInstructions = editInstructions.getText().toString();
-            imageID = R.drawable.said;
+//            imageID = uploadImage.getSourceLayoutResId();
             String newUrl = editYoutube.getText().toString();
 
             //Check and ask user for empty fields
@@ -205,13 +263,13 @@ public class AddRecipe extends AppCompatActivity {
                 else {*/
                     Toast toast = Toast.makeText(getApplicationContext(), "Wrong URL, bro", Toast.LENGTH_SHORT);
                     toast.show();
-                    return;
+                    //return;
                 //}
 
             }
             String newDiff = spinner.getSelectedItem().toString();
             if(newDiff == "Choose meals difficulty") {newDiff = "unranked";}
-            Recipe newRecipe = new Recipe(newTitle, imageID, newShortDescription, ingredients, newDiff, newInstructions);
+            Recipe newRecipe = new Recipe(newTitle, R.drawable.said, newShortDescription, ingredients, newDiff, newInstructions);
 
             CookingApp.addRecipe(newRecipe);
 
@@ -225,7 +283,7 @@ public class AddRecipe extends AppCompatActivity {
             editInstructions.setText("");
             editYoutube.setText("");
             spinner.setSelection(0);
-            imageID = -1;
+            imageID = R.drawable.intro;
 
             Intent intent = new Intent(getBaseContext(), CookingApp.class);
             startActivity(intent);

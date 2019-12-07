@@ -1,8 +1,9 @@
-package com.example.ktucookingapp;
+    package com.example.ktucookingapp;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,7 +73,7 @@ public class ListAdapter extends ArrayAdapter<Recipe> {
         ImageButton btnDelete = (ImageButton) v.findViewById(R.id.btnDelete);
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setTitle("Warning!");
                 builder.setMessage("You want to delete recipe, bro?");
@@ -81,8 +82,12 @@ public class ListAdapter extends ArrayAdapter<Recipe> {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(getContext(), "You've choosen to delete recipe", Toast.LENGTH_SHORT).show();
+                        CookingApp.mDB.recipeDao().deleteRecipe(CookingApp.recipes.get(CookingApp.position));
+//                        CookingApp.recipes = CookingApp.mDB.recipeDao().getAllRecipes();
+//                        CookingApp.listV.setAdapter(ListAdapter.this);
                         CookingApp.recipes.remove(CookingApp.position);
-                        notifyDataSetChanged();
+                        CookingApp.updateListView();
+//                        notifyDataSetChanged();
                     }
                 });
 
